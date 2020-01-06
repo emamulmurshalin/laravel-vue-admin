@@ -17,6 +17,24 @@ Vue.component(AlertError.name, AlertError)
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
+/*----Start vue-progressbar*/
+import VueProgressBar from 'vue-progressbar'
+const options = {
+    color: '#bffaf3',
+    failedColor: '#874b4b',
+    thickness: '5px',
+    transition: {
+         speed: '0.3s',
+         opacity: '0.6s',
+         termination: 300
+     },
+    autoRevert: true,
+    location: 'top',
+    inverse: false
+}
+Vue.use(VueProgressBar, options)
+/*----Start vue-progressbar*/
+
 import Dashboard from './components/Dashboard.vue';
 import Profile from './components/Profile.vue';
 import Users from './components/Users.vue';
@@ -36,6 +54,8 @@ Vue.filter('capitalize', function (text) {
 Vue.filter('myDate', function (text) {
     return moment(text).format('MMMM Do YYYY');
 })
+
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
