@@ -5,9 +5,30 @@
  */
 
 require('./bootstrap');
-require('admin-lte');
 
 window.Vue = require('vue');
+import { Form, HasError, AlertError } from 'vform';
+window.Form = Form;
+
+Vue.component(HasError.name, HasError)
+Vue.component(AlertError.name, AlertError)
+
+import VueRouter from 'vue-router'
+Vue.use(VueRouter)
+
+import Dashboard from './components/Dashboard.vue';
+import Profile from './components/Profile.vue';
+import Users from './components/Users.vue';
+let routes = [
+    { path: '/dashboard', component: Dashboard },
+    { path: '/users', component: Users },
+    { path: '/profile', component: Profile }
+]
+
+const router = new VueRouter({
+    mode: 'history',
+    routes // short for `routes: routes`
+})
 
 /**
  * The following block of code may be used to automatically register your
@@ -20,7 +41,7 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -30,4 +51,5 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 
 const app = new Vue({
     el: '#app',
+    router,
 });
