@@ -19,6 +19,7 @@
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th>Type</th>
+                                <th>Register Date</th>
                                 <th>Modify</th>
                             </tr>
                             </thead>
@@ -28,8 +29,8 @@
                                 <td>{{ user.id }}</td>
                                 <td>{{ user.name }}</td>
                                 <td>{{ user.email }}</td>
-                                <td>{{ user.type }}</td>
-                                <td><span class="tag tag-success">Approved</span></td>
+                                <td>{{ user.type | capitalize }}</td>
+                                <td>{{ user.created_at | myDate }}</td>
                                 <td>
                                     <a href="#">
                                         <i class="fas fa-user-edit indigo"></i>
