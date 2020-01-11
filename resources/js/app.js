@@ -7,9 +7,13 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+
+//Date formate
 import moment from "moment";
+
 import { Form, HasError, AlertError } from 'vform';
 window.Form = Form;
+//Date formate
 
 /*----Start Sweetalert*/
 import Swal from 'sweetalert2';
@@ -39,11 +43,11 @@ Vue.use(VueRouter)
 /*----Start vue-progressbar*/
 import VueProgressBar from 'vue-progressbar'
 const options = {
-    color: '#bffaf3',
-    failedColor: '#874b4b',
+    color: '#31fa10',
+    failedColor: '#ff2011',
     thickness: '5px',
     transition: {
-         speed: '0.4s',
+         speed: '0.2s',
          opacity: '0.6s',
          termination: 300
      },
