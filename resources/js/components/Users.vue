@@ -56,8 +56,8 @@
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" v-show="!editmode" id="newModal">Add New User</h5>
-                        <h5 class="modal-title" v-show="editmode" id="newModal">Update User's Info</h5>
+                        <h5 class="modal-title" v-show="!editmode">Add New User</h5>
+                        <h5 class="modal-title" v-show="editmode">Update User's Info</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -133,14 +133,13 @@
                 this.$Progress.start();
                 this.form.put('api/user/'+this.form.id)
                     .then(()=>{
+                        Fire.$emit('afterAction');
                         $('#Modal').modal('hide');
-                        Swal.fire(
-                            'Updated!',
-                            'Information Updated Successfully.',
-                            'success'
-                        )
+                        Toast.fire({
+                            icon: 'success',
+                            title: 'Update User Information Successfully'
+                        })
                         this.$Progress.finsh();
-                        Fire.$emit('Aftercreate');
                     })
                     .catch(()=>{
                         this.$Progress.finish();
@@ -175,7 +174,7 @@
                                 'Your file has been deleted.',
                                 'success'
                             )
-                            Fire.$emit('Aftercreate');
+                            Fire.$emit('afterAction');
                         }).catch(() => {
                             Swal.fire(
                                 'Failed!',
@@ -193,7 +192,7 @@
                 this.$Progress.start()
                 this.form.post('api/user')
                     .then(()=>{
-                        Fire.$emit('Aftercreate');
+                        Fire.$emit('afterAction');
                         $('#Modal').modal('hide')
 
                         Toast.fire({
@@ -203,13 +202,13 @@
                         this.$Progress.finish()
                     })
                     .catch(()=>{
-
+                        this.$Progress.fail()
                     })
             }
         },
         created() {
             this.loadUsers();
-            Fire.$on('Aftercreate',() => {
+            Fire.$on('afterAction',() => {
                this.loadUsers();
             });
             //setInterval(()=> this.loadUsers(), 3000);
